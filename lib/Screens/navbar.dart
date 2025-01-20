@@ -8,7 +8,12 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Drawer(
-      child: ListView(
+      child: Theme(
+          data: Theme.of(context).copyWith(
+            hintColor: Colors.white,
+            canvasColor: Colors.white
+          ),
+       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
@@ -57,6 +62,7 @@ class Navbar extends StatelessWidget {
           ),
         ],
       ),
+    )
     );
   }
 }
