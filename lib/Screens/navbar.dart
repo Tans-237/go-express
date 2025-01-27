@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_express/Screens/login_page.dart';
 import 'package:go_express/Screens/profile_page.dart';
 import 'package:go_express/Screens/settings_page.dart';
 
@@ -32,10 +33,9 @@ class Navbar extends StatelessWidget {
             leading: const Icon(Icons.account_circle_outlined),
             title: const Text('My account'),
             onTap: () {
-              Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___)=>const ProfilePage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileWidget()));
             },
           ),
-          const Divider(),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
@@ -47,18 +47,22 @@ class Navbar extends StatelessWidget {
             title: const Text('FAQ and Comment'),
             onTap: () {},
           ),ListTile(
-            leading: const Icon(Icons.share),
-            title: const Text('Share'),
-            onTap: () {},
-          ),ListTile(
             leading: const Icon(Icons.help),
             title: const Text('Contact us'),
+            onTap: () {},
+          ),
+          Divider(),
+          ListTile(
+            leading: const Icon(Icons.share),
+            title: const Text('Share'),
             onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.login),
             title: const Text('Login'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___)=>LoginPage()));
+            },
           ),
         ],
       ),

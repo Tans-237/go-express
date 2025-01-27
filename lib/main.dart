@@ -1,3 +1,4 @@
+import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_express/Screens/event_details_page.dart';
 import 'package:go_express/Screens/navbar.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home: OnboardingScreen(),
     );
@@ -150,132 +151,197 @@ class OnboardingPage {
   });
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final events = [
+    {
+      "Agence": "Touristique",
+      "Destination": "Douala - Yaoundé",
+      "Date": "2025-01-12T15:37:00",
+      "classe": "Classique",
+      "prix": "5000",
+      "Localisation": "my location",
+      "immatriculation": "CE 767 MR",
+      "Nombre de place": "15",
+      "avatar": "bus2"
+    },
+    {
+      "Agence": "Finex",
+      "Destination": "Yaounde - Mbalmayo",
+      "Date": "2025-09-12T15:37:00",
+      "classe": "VIP",
+      "prix": "7000 ",
+      "Localisation": "my location",
+      "immatriculation": "CE 767 MR",
+      "Nombre de place": "15",
+      "avatar": "bus1"
+    },
+    {
+      "Agence": "Galaxie",
+      "Destination": "Mbalmayo - Yaoundé",
+      "Date": "2024-01-23T15:00:00",
+      "classe": "VIP",
+      "prix": "1000",
+      "Localisation": "my location",
+      "immatriculation": "CE 767 MR",
+      "Nombre de place": "15",
+      "avatar": "bus3"
+    },
+    {
+      "Agence": "United epress",
+      "Destination": "Douala - Yaoundé",
+      "Date": "2025-01-12T15:37:00",
+      "classe": "VIP",
+      "prix": "7000",
+      "Localisation": "my location",
+      "immatriculation": "CE 797 MR",
+      "Nombre de place": "30",
+      "avatar": "bus1"
+    },
+    {
+      "Agence": "Touristique",
+      "Destination": "Douala - Yaoundé",
+      "Date": "2025-01-12T15:37:00",
+      "classe": "Classique",
+      "prix": "5000",
+      "Localisation": "my location",
+      "immatriculation": "CE 767 MR",
+      "Nombre de place": "15",
+      "avatar": "bus2"
+    },
+    {
+      "Agence": "Regionale",
+      "Destination": "Yaoundé - Mbalmayo",
+      "Date": "2024-11-02T15:37:00",
+      "classe": "Classique",
+      "prix": "700",
+      "Localisation": "my location",
+      "immatriculation": "CE 667 MR",
+      "Nombre de place": "19",
+      "avatar": "bus3"
+    },
+    {
+      "Agence": "Buca voyage",
+      "Destination": "Douala - Yaoundé",
+      "Date": "2025-01-12T15:37:00",
+      "classe": "Classique",
+      "prix": "5000",
+      "Localisation": "my location",
+      "immatriculation": "CE 767 MR",
+      "Nombre de place": "15",
+      "avatar": "bus2"
+    },
+    {
+      "Agence": "Touristique",
+      "Destination": "Douala - Yaoundé",
+      "Date": "2025-01-12T15:37:00",
+      "classe": "Classique",
+      "prix": "5000",
+      "Localisation": "my location",
+      "immatriculation": "CE 767 MR",
+      "Nombre de place": "15",
+      "avatar": "bus2"
+    },
+    {
+      "Agence": "Buca",
+      "Destination": "Sangmelima - Yaoundé",
+      "Date": "2025-01-12T12:30:00",
+      "classe": "VIP",
+      "prix": "5000",
+      "Localisation": "my location",
+      "immatriculation": "CE 767 MR",
+      "Nombre de place": "15",
+      "avatar": "bus2"
+    }
+  ];
+
+  String searchQuery = "";
+  String sortBy = 'Destination'; // Critère de tri
+  bool ascending = true; // Ordre de tri
+  late String travelClass = 'VIP';
+  late String travelDestination = 'Yaoundé - Douala';
+  late String chauffeur = 'Hamadou';
+  late String vehicule = "LT 808 KP";
+
+  @override
   Widget build(BuildContext context) {
-    final events = [
-      {
-        "Agence":"Touristique",
-        "Destination": "Douala - Yaoundé",
-        "Date": "12/01/2025 15h37",
-        "classe":"Classique",
-        "prix":"5000 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 767 MR",
-        "Nombre de place":"15",
-        "avatar": "bus2"
-      },
-      {
-        "Agence":"Finex",
-        "Destination": "Yaounde - Mbalmayo",
-        "Date": "12/09/2025 15h37",
-        "classe":"VIP",
-        "prix":"7000 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 767 MR",
-        "Nombre de place":"15",
-        "avatar": "bus1"
-      },
-      {
-        "Agence":"Galaxie",
-        "Destination": "Mbalmayo - Yaoundé",
-        "Date": "23/01/2024 15h00",
-        "classe":"VIP",
-        "prix":"1000 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 767 MR",
-        "Nombre de place":"15",
-        "avatar": "bus3"
-      },
-      {
-        "Agence":"United epress",
-        "Destination": "Douala - Yaoundé",
-        "Date": "12/01/2025 15h37",
-        "classe":"VIP",
-        "prix":"7000 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 797 MR",
-        "Nombre de place":"30",
-        "avatar": "bus1"
-      },
-      {
-        "Agence":"Touristique",
-        "Destination": "Douala - Yaoundé",
-        "Date": "12/01/2025 15h37",
-        "classe":"Classique",
-        "prix":"5000 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 767 MR",
-        "Nombre de place":"15",
-        "avatar": "bus2"
-      },
-      {
-        "Agence":"Regionale",
-        "Destination": "Yaoundé - Mbalmayo",
-        "Date": "02/11/2024 15h37",
-        "classe":"Classique",
-        "prix":"700 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 667 MR",
-        "Nombre de place":"19",
-        "avatar": "bus3"
-      },
-      {
-        "Agence":"Buca voyage",
-        "Destination": "Douala - Yaoundé",
-        "Date": "12/01/2025 15h37",
-        "classe":"Classique",
-        "prix":"5000 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 767 MR",
-        "Nombre de place":"15",
-        "avatar": "bus2"
-      },
-      {
-        "Agence":"Touristique",
-        "Destination": "Douala - Yaoundé",
-        "Date": "12/01/2025 15h37",
-        "classe":"Classique",
-        "prix":"5000 FCFA",
-        "Localisation":"my location",
-        "immatriculation":"CE 767 MR",
-        "Nombre de place":"15",
-        "avatar": "bus2"
+    final filteredEvents = events.where((event) {
+      return event["Destination"]!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          event["Agence"]!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          event["Date"]!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          event["classe"]!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          event["prix"]!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          event["Localisation"]!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          event["immatriculation"]!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          event["Nombre de place"]!.toLowerCase().contains(searchQuery.toLowerCase());
+    }).toList();
+
+    // Tri des événements
+    filteredEvents.sort((a, b) {
+      int comparison = 0;
+
+      switch (sortBy) {
+        case 'Destination':
+          comparison = a["Destination"]!.compareTo(b["Destination"]!);
+          break;
+        case 'Agence':
+          comparison = a["Agence"]!.compareTo(b["Agence"]!);
+          break;
+        case 'Prix':
+          try {
+            comparison = int.parse(a["prix"]!.split(' ')[0]).compareTo(int.parse(b["prix"]!.split(' ')[0]));
+          } catch (e) {
+            comparison = 0; // Gérer l'exception en cas d'erreur de parsing
+          }
+          break;
+        case 'Classe':
+          comparison = a["classe"]!.compareTo(b["classe"]!);
+          break;
+        case 'Date':
+          try {
+            comparison = DateTime.parse(a["Date"]!).compareTo(DateTime.parse(b["Date"]!));
+          } catch (e) {
+            comparison = 0; // Gérer l'exception en cas d'erreur de parsing
+          }
+          break;
       }
-    ];
+
+      return ascending ? comparison : -comparison;
+    });
 
     return Scaffold(
       drawer: Navbar(),
-      body: Stack( // Utilisation de Stack pour superposer les widgets
+      body: Stack(
         children: [
           Column(
             children: [
               Stack(
                 children: [
-                  // Image d'arrière-plan
                   Positioned.fill(
                     child: Image.asset(
-                      'assets/images/bg.jpeg', // Chemin de votre image d'arrière-plan
+                      'assets/images/bg.jpeg',
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Image au premier plan
                   Center(
                     child: Image.asset(
-                      'assets/images/logo.png', // Chemin de votre image au premier plan
-                      width: 200, // Ajustez la largeur selon vos besoins
-                      height: 300, // Ajustez la hauteur selon vos besoins
+                      'assets/images/logo_blanc.png',
+                      width: 200,
+                      height: 300,
                     ),
                   ),
-                  // AppBar personnalisée
                   Positioned(
                     top: 0,
                     left: 0,
                     right: 0,
                     child: AppBar(
-                      backgroundColor: Colors.transparent, // Fond semi-transparent
+                      backgroundColor: Colors.transparent,
                       elevation: 0,
                       actions: [
                         IconButton(
@@ -304,86 +370,316 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // Barre de recherche et bouton de tri
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Color(0xFFEEEEF0), // Couleur de fond modifiée
-                            hintText: 'Search...',
-                            hintStyle: TextStyle(color: Color(0xFFCDCDCD)), // Couleur du texte d'indice
-                            prefixIcon: Icon(Icons.search, color:  Color(0xFFCDCDCD)), // Icône de recherche
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              borderSide: BorderSide.none,
+              Stack(
+                children: [Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                searchQuery = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Color(0xFFEEEEF0),
+                              hintText: 'Search...',
+                              hintStyle: TextStyle(color: Color(0xFFCDCDCD)),
+                              prefixIcon: Icon(Icons.search, color: Color(0xFFCDCDCD)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(50),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 5),
-                      IconButton(
-                        icon: Icon(Icons.sort, color: Colors.black), // Icône de tri
-                        onPressed: () {
-                          // Logique de tri ici
-                          print("Trier les résultats");
-                        },
-                      ),
-                    ],
+                        const SizedBox(width: 5),
+                        IconButton(
+                          icon: Icon(Icons.sort, color: Colors.black),
+                          onPressed: () {
+                            _showSortDialog();
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                )],
               ),
-              // Affichage des cartes avec couleur blanche
               Expanded(
-                child: ListView.builder(
-                  itemCount: events.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        // Naviguer vers une nouvelle page avec les détails
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EventDetailsPage(event: events[index]),
+                child: filteredEvents.isNotEmpty
+                    ? ListView.builder(
+                      itemCount: filteredEvents.length,
+                      itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EventDetailsPage(event: filteredEvents[index]),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 1,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0), // Coins arrondis
                           ),
-                        );
-                      },
-                      child: Card(
-                        color: Colors.white, // Couleur de fond de la carte
-                        child: ListTile(
-                          leading: Image.asset(
-                            'assets/images/${events[index]["avatar"]}.jpeg', // Chemin de l'avatar
-                            width: 50,
-                            height: 50,
-                          ),
-                          title: Text(events[index]["Destination"]!),
-                          subtitle: Text(events[index]["Date"]!),
+                          child: ListTile(
+                            leading: Image.asset(
+                              'assets/images/${filteredEvents[index]["avatar"]}.jpeg',
+                              width: 50,
+                              height: 50,
+                            ),
+                            title: Text(filteredEvents[index]["Destination"]!),
+                            subtitle: Text(filteredEvents[index]["Date"]!),
                         ),
                       ),
                     );
                   },
+                )
+                    : Center(
+                      child: Text(
+                    "Aucun résultat pour " + searchQuery,
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
             ],
           ),
-          // ElevatedButton circulaire
           Positioned(
             bottom: 20,
             right: 20,
             child: FloatingActionButton(
-              onPressed: () {},
-              child: const Icon(Icons.add), // Icône du bouton
+              onPressed: () {
+                //Navigator.push(context, PageRouteBuilder(pageBuilder:(_,__,___)=>AddTravelPage()));
+                double heightbetween = 5;
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text(
+                      textAlign: TextAlign.center,
+                      'Add voyage',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    content: Container(
+                      width: double.infinity,
+                      child: Form(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    textAlign: TextAlign.start,
+                                      "Destination"
+                                  ),
+                                ],
+                              ),
+                              DropdownButtonFormField(
+                                items: [
+                                  DropdownMenuItem(value: 'Yaoundé - Mbalmayo', child: Text("Yaoundé - Mbalmayo")),
+                                  DropdownMenuItem(value: 'Yaoundé - Douala', child: Text("Yaoundé - Douala"))
+                                ],decoration: InputDecoration(
+                                  border: OutlineInputBorder()
+                              ),
+                                value: travelDestination,
+                                onChanged: (value) {
+                                  setState(() {
+                                    travelDestination = value!;
+                                  });
+                                },
+                              ),
+                              SizedBox(height: heightbetween),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      textAlign: TextAlign.start,
+                                      "Classe"
+                                  ),
+                                ],
+                              ),
+                              DropdownButtonFormField(
+                                items: [
+                                  DropdownMenuItem(value: 'VIP', child: Text("VIP")),
+                                  DropdownMenuItem(value: 'Classique', child: Text("Classique"))
+                                ],decoration: InputDecoration(
+                                border: OutlineInputBorder()
+                              ),
+                                value: travelClass,
+                                onChanged: (value) {
+                                  setState(() {
+                                    travelClass = value!;
+                                  });
+                                },
+                              ),
+                              SizedBox(height: heightbetween),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      textAlign: TextAlign.start,
+                                      "Chauffeur"
+                                  ),
+                                ],
+                              ),
+                              DropdownButtonFormField(
+                                items: [
+                                  DropdownMenuItem(value: 'Hamadou', child: Text("Hamadou")),
+                                  DropdownMenuItem(value: 'Atangana', child: Text("Atangana"))
+                                ],decoration: InputDecoration(
+                                  border: OutlineInputBorder()
+                              ),
+                                value: chauffeur,
+                                onChanged: (value) {
+                                  setState(() {
+                                    chauffeur = value!;
+                                  });
+                                },
+                              ),
+                              SizedBox(height: heightbetween),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      textAlign: TextAlign.start,
+                                      "Immatriculation du véhicule"
+                                  ),
+                                ],
+                              ),
+                              DropdownButtonFormField(
+                                items: [
+                                  DropdownMenuItem(value: 'CE 737 PL', child: Text("CE 737 PL")),
+                                  DropdownMenuItem(value: 'LT 808 KP', child: Text("LT 808 KP")),
+                                  DropdownMenuItem(value: 'AD 808 KP', child: Text("AD 808 KP"))
+                                ],decoration: InputDecoration(
+                                  border: OutlineInputBorder()
+                              ),
+                                value: vehicule,
+                                onChanged: (value) {
+                                  setState(() {
+                                    chauffeur = vehicule;
+                                  });
+                                },
+                              ),
+                              SizedBox(height: 2*heightbetween),
+                              SingleChildScrollView(
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintStyle: TextStyle(color: Colors.black45),
+                                    errorStyle: TextStyle(color: Colors.redAccent),
+                                    border: OutlineInputBorder(),
+                                    suffixIcon: Icon(Icons.event_note),
+                                    labelText: 'Date et heure de départ'
+                                  ),
+                                  mode: DateTimeFieldPickerMode.dateAndTime,
+                                  autovalidateMode: AutovalidateMode.always,
+                                  validator: (e) => (e?.day ?? 0) == 1? 'please not the first day ': null,
+                                  //onChanged: (DateTime value){}
+                                ),
+                              )
+                            ],
+                          )
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Save'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Cancel'),
+                      )
+                    ],
+                  ),
+                );
+              },
+              child: const Icon(Icons.add),
               foregroundColor: Colors.white,
-              backgroundColor: const Color(0xFF3D56F0), // Couleur de fond
+              backgroundColor: const Color(0xFF3D56F0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showSortDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        String? selectedSortBy = sortBy;
+        bool selectedAscending = ascending;
+
+        return AlertDialog(
+          title: Text('Trier par'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DropdownButton<String>(
+                value: selectedSortBy,
+                isExpanded: true,
+                items: [
+                  DropdownMenuItem(value: 'Destination', child: Text('Destination')),
+                  DropdownMenuItem(value: 'Agence', child: Text('Agence')),
+                  DropdownMenuItem(value: 'Prix', child: Text('Prix')),
+                  DropdownMenuItem(value: 'Classe', child: Text('Classe')),
+                  DropdownMenuItem(value: 'Date', child: Text('Date')),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    selectedSortBy = value;
+                  });
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Ordre:'),
+                  Switch(
+                    value: selectedAscending,
+                    onChanged: (value) {
+                      selectedAscending = value; // Mise à jour instantanée sans setState
+                      // Optionnel: Vous pouvez appeler setState ici si vous souhaitez mettre à jour l'affichage à l'extérieur du dialogue
+                    },
+                  ),
+                  Text(selectedAscending ? 'Croissant' : 'Décroissant'),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  sortBy = selectedSortBy!;
+                  ascending = selectedAscending;
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text('Appliquer'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Annuler'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

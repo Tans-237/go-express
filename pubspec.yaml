@@ -1,5 +1,5 @@
 name: go_express
-description: "A new Flutter project."
+description: "Application de reservation de voyage et circuit touristique."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -30,16 +30,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^1.1.4
+  numberpicker: ^2.1.2
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.4
+  image_picker: ^1.1.2
+  date_field: ^6.0.0
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/logo.jpg
+  image: assets/images/GoExpress.svg
   android: true
   ios: true
   android_gravity: center
@@ -52,7 +56,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.jpg"
+  image_path: "assets/images/GoExpress.svg"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
